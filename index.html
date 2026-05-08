@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sradhya Koner | Her Universe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a16;
+            --bg-gradient: linear-gradient(135deg, #0a0a16, #16162d, #2d1b36);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-pink: #f472b6;
+            --accent-purple: #c084fc;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-purple); border-radius: 4px; }
+
+        /* Floating Stars Background */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            opacity: 0.3;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        /* Reusable Glassmorphism Container */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(192, 132, 252, 0.1);
+            border-color: rgba(244, 114, 182, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .moon {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fff, #fef08a, transparent 60%);
+            border-radius: 50%;
+            box-shadow: 0 0 40px #fef08a, inset 0 0 20px #fff;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #e2e8f0, var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            color: var(--accent-purple);
+            min-height: 30px;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            animation: bounce 2s infinite;
+        }
+
+        /* Layout Grids */
+        section {
+            padding: 100px 10vw;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-purple);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Lists formatting */
+        ul { list-style: none; }
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+        li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-pink);
+        }
+
+        /* Routine Section */
+        .routine-card { text-align: center; }
+        .routine-time {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 2AM Mind Section */
+        .dark-mind {
+            background: rgba(0,0,0,0.4);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+        }
+        
+        .floating-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-main);
+            margin: 2rem 0;
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+        }
+
+        /* Footer / Ending */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <section class="hero">
+        <div class="moon"></div>
+        <h1>Sradhya Koner</h1>
+        <div class="typing-text serif" id="typing-text"></div>
+        <div class="scroll-indicator">
+            <p>Scroll slowly and enter her universe</p>
+            <br>↓
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Who She Is</h2>
+        <div class="grid-2">
+            <div class="glass-card hidden">
+                <h3 style="color: var(--text-main); margin-bottom: 1.5rem;">First Impression</h3>
+                <ul>
+                    <li>Soft spoken & Gentle energy</li>
+                    <li>Dreamy eyes & Calm presence</li>
+                    <li>Emotionally deep</li>
+                    <li>Quiet but expressive</li>
+                    <li>Introvert with imagination</li>
+                    <li>Soft feminine aura</li>
+                </ul>
+            </div>
+            <div class="glass-card hidden">
+                <h3 style="color: var(--text-main); margin-bottom: 1.5rem;">Personality</h3>
+                <ul>
+                    <li>Thinks deeply, feels intensely</li>
+                    <li>Romanticizes small moments</li>
+                    <li>Notices little details & energies</li>
+                    <li>Peace over attention, Silence over noise</li>
+                    <li>Kind but distant sometimes</li>
+                    <li>Hard to fully understand</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="dark-mind hidden">
+        <h2 class="section-title" style="color: var(--accent-pink);">Her Mind at 2AM</h2>
+        <p class="floating-quote serif">"Beautiful overthinking and soft chaos."</p>
+        <div class="grid-3" style="text-align: left;">
+            <div class="glass-card">
+                <ul>
+                    <li>Thinking about random memories</li>
+                    <li>Listening to slow songs</li>
+                    <li>Imagining future versions of herself</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <ul>
+                    <li>Missing moments that already passed</li>
+                    <li>Wondering if people understand her</li>
+                    <li>Creating fake scenarios</li>
+                </ul>
+            </div>
+            <div class="glass-card">
+                <ul>
+                    <li>Looking at the moon silently</li>
+                    <li>Feeling everything at once</li>
+                    <li>Memories replaying endlessly</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Daily Routine</h2>
+        <div class="grid-3">
+            <div class="glass-card routine-card hidden">
+                <div class="routine-time">☀️</div>
+                <h3 style="margin-bottom: 1rem;">Morning</h3>
+                <ul style="text-align: left;">
+                    <li>Slow mornings & Warm coffee</li>
+                    <li>Calm music & Sleepy eyes</li>
+                    <li>Saving aesthetic quotes</li>
+                </ul>
+            </div>
+            <div class="glass-card routine-card hidden">
+                <div class="routine-time">🌸</div>
+                <h3 style="margin-bottom: 1rem;">Evening</h3>
+                <ul style="text-align: left;">
+                    <li>Favorite golden hour</li>
+                    <li>Walking slowly with earphones</li>
+                    <li>Soft conversations & Calm skies</li>
+                </ul>
+            </div>
+            <div class="glass-card routine-card hidden">
+                <div class="routine-time">🌙</div>
+                <h3 style="margin-bottom: 1rem;">Night</h3>
+                <ul style="text-align: left;">
+                    <li>Real emotions appear</li>
+                    <li>Writing random notes</li>
+                    <li>Feeling connected to silence</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="grid-2">
+            <div class="glass-card hidden">
+                <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Aesthetic Energy</h3>
+                <p style="color: var(--text-muted); line-height: 2;">
+                    Moonlight • Rainy windows • Late-night drives • Blurry lights • Pink sunsets • Silver jewelry • Oversized hoodies • Glossy lips • Soft perfumes • Dim room lights • Pinterest moods
+                </p>
+            </div>
+            <div class="glass-card hidden">
+                <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Playlist Energy</h3>
+                <p style="color: var(--text-muted); line-height: 2;">
+                    Slow reverb songs • Emotional lyrics • Late-night headphones • Songs that feel like memories • Music louder than emotions • Soft girl energy playlists
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="hidden">
+            <h3 class="serif" style="font-size: 2rem; color: var(--text-main); margin-bottom: 1rem;">Mini Journal Thoughts</h3>
+            <p>"Some nights feel heavier than others."</p>
+            <p>"Maybe peace is enough."</p>
+            <p>"Softness should never be weakness."</p>
+            
+            <div style="margin-top: 4rem;">
+                <p style="color: var(--accent-pink);">✦ Thank you for entering her universe ✦</p>
+                <p>Some souls are meant to be understood slowly.</p>
+                <p>Quietly existing. Dreaming endlessly. Glowing softly like moonlight. 🌙</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typing Effect for the Hero Section
+        const phrases = [
+            "Soft heart, lost in her own little universe 🌙",
+            "Calm soul with chaotic thoughts.",
+            "Existing somewhere between dreams and reality.",
+            "Quiet girls always carry the deepest emotions."
+        ];
+        
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        let isEnd = false;
+        const textDisplay = document.getElementById('typing-text');
+
+        function loop() {
+            isEnd = false;
+            textDisplay.innerHTML = currentPhrase.join('');
+
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                    textDisplay.innerHTML = currentPhrase.join('');
+                }
+
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                    textDisplay.innerHTML = currentPhrase.join('');
+                }
+
+                if (j == phrases[i].length) {
+                    isEnd = true;
+                    isDeleting = true;
+                }
+
+                if (isDeleting && j === 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i == phrases.length) { i = 0; }
+                }
+            }
+            const spedUp = Math.random() * (80 - 50) + 50;
+            const normalSpeed = Math.random() * (150 - 100) + 100;
+            const time = isEnd ? 2500 : isDeleting ? spedUp : normalSpeed;
+            setTimeout(loop, time);
+        }
+        loop();
+
+        // Scroll Animation Observer (Fade In Elements)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+  </html>
+
